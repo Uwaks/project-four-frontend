@@ -1,5 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+import ItemsIndex from './components/items/ItemsIndex'
+import Home from './components/common/Home'
+import Navbar from './components/common/Navbar'
 
 function App() {
   React.useEffect(() => {
@@ -11,7 +16,17 @@ function App() {
   }, [])
 
   return (
-    <h1>This is the App</h1>
+    <BrowserRouter>
+      <Navbar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/items">
+          <ItemsIndex />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   )
 }
 
