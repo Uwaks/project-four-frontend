@@ -1,17 +1,17 @@
 import React from 'react'
-
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import ItemsIndex from './components/items/ItemsIndex'
 import Home from './components/common/Home'
-import Navbar from './components/common/Navbar'
 import ItemShow from './components/items/ItemShow'
+import Header from './components/common/Header'
+import Footer from './components/common/Footer'
 
 function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Header />
       <Switch>
         <Route exact path="/">
           <Home />
@@ -23,6 +23,7 @@ function App() {
           <ItemsIndex />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   )
 }
