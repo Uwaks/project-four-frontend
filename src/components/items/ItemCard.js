@@ -1,13 +1,11 @@
-
+// import { Link } from 'react-router-dom'
 
 function ItemCard({ item }) {
-  
-  const handleClick = () => {
-    console.log('clicked view')
-  }
+
   
   return (
-    <div key={item.id}className="card">
+    // <Link key={item.id} to={`/items/${item.id}`}>
+    <div className="card"> 
       <div className="card-header">
         {item.teamName}
       </div>
@@ -18,8 +16,8 @@ function ItemCard({ item }) {
         <p className="card-text">{item.condition}</p>
         <p className="card-text">{item.price}</p>
       </div>
-      <button className="btn-info" onClick={handleClick}>View</button>
-    </div>     
+    </div>  
+    // </Link>       
 
     
     

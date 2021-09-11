@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ItemsIndex from './components/items/ItemsIndex'
 import Home from './components/common/Home'
 import Navbar from './components/common/Navbar'
+import ItemShow from './components/items/ItemShow'
 
 function App() {
 
@@ -15,6 +16,9 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route path="/items/:itemId">
+          <ItemShow />
+        </Route>  
         <Route path="/items">
           <ItemsIndex />
         </Route>

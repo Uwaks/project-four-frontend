@@ -1,7 +1,7 @@
 import React from 'react'
-import { ButtonGroup } from 'react-bootstrap'
+// import { ButtonGroup } from 'react-bootstrap'
 import { useHistory } from 'react-router'
-
+import { Link } from 'react-router-dom'
 import { getAllItems } from '../lib/api'
 import ItemCard from './ItemCard'
 
@@ -59,7 +59,7 @@ function ItemsIndex() {
       behavior: 'smooth',
     })
   }
-
+  console.log(items)
   return (
     <section className="Container">
       <div>  
@@ -80,7 +80,9 @@ function ItemsIndex() {
       <div className="card-deck">
         {isLoading && <p>...loading</p>}
         {items && filteredItems().map(item => (
-          <ItemCard key={item.id} item={item} />
+          <Link key={item.id} to={`/items/${item.id}/`}>
+            <ItemCard item={ item } />
+          </Link>
         )
         )}
       </div> 
