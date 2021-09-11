@@ -1,10 +1,17 @@
 import React from 'react'
+import { ButtonGroup } from 'react-bootstrap'
+import { useHistory } from 'react-router'
 
 import { getAllItems } from '../lib/api'
+import ItemCard from './ItemCard'
 
 function ItemsIndex() {
   const [items, setItems] = React.useState(null)
-  const isLoading = !items
+  const [isError, setIsError] = React.useState(false)
+  const isLoading = !items && !isError
+  const [searchValue, setSearchValue] = React.useState('')
+  const history = useHistory()
+  const rootElement = document.documentElement
 
   React.useEffect(() => {
     const getData = async () => {
@@ -12,35 +19,83 @@ function ItemsIndex() {
         const response = await getAllItems()
         setItems(response.data)
       } catch (err) {
-        console.log(err)
+        setIsError(true)
       } 
     }
     getData()
   }, [])
 
-  console.log(items)
+  const compareRecentlyAdded = (a, b) => {
+    const bandA = a.id
+    const bandB = b.id
+    let comparison = 0
+    
+    if (bandA > bandB) {
+      comparison = 1
+    } else {
+      comparison = -1
+    }
+    return comparison
+  }
+
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value)
+    console.log(e.target.value)
+  }
+
+  const filteredItems = () => {
+    return items.sort(compareRecentlyAdded).filter(item => {
+      return (item.playerName.toLowerCase().includes(searchValue.toLocaleLowerCase()))
+    })
+  }
+
+  const handleHome = () => {
+    history.push('/')
+  }
+
+  const handleScrollToTop = () => {
+    rootElement.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <section className="Container">
-      <h1>Swap/Shop</h1>
+      <div>  
+        <h1>Swap/Shop</h1>
+      </div>
+      <div className="search-bar">
+        <label htmlFor="header-search">
+          <span className="visually-hidden">Search by player</span>
+        </label>
+        <input  
+          type="text"
+          id="header-search"
+          placeholder="Search by player"
+          name="s"
+          onChange={handleSearch}
+        />  
+      </div>
       <div className="card-deck">
         {isLoading && <p>...loading</p>}
-        {items && items.map(item => {
-          return (
-            <div key={item.id}className="card">
-              <div className="card-header">
-                {item.teamName}
-              </div>
-              <img className="card-img-top" src={item.image} alt={item.playerName} />
-              <div className="card-body">
-                <h5 className="card-title">{item.playerName}</h5>
-                <p className="card-text">{item.description}</p>
-                <p className="card-text">{item.condition}</p>
-                <p className="card-text">{item.price}</p>
-              </div>
-            </div>
-          )
-        })}
-      </div>      
+        {items && filteredItems().map(item => (
+          <ItemCard key={item.id} item={item} />
+        )
+        )}
+      </div> 
+      <div className="btn-group">
+        <button 
+          className="btn btn-outline-info" 
+          onClick={handleHome}>
+            Home
+        </button>
+        <button
+          className="btn btn-outline-info"
+          onClick={handleScrollToTop}
+        >↑ to top</button>  
+      </div>
+          
     </section>
     
   )
