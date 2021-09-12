@@ -37,14 +37,17 @@ function ItemShow() {
     getData()
   }, [])
 
-  let similarItems = []
-  const findSimilarItems = () => {
-    similarItems = items.filter(kit => {
-      return kit.teamName === item.teamName
-    })
-    console.log(similarItems)
+  const handleClick = () => {
+    console.log('add to cart')
   }
-  
+  // * Work to try and display similar items based on teamName
+  // let similarItems = []
+  // const findSimilarItems = () => {
+  //   similarItems = items.filter(kit => {
+  //     return kit.teamName === item.teamName
+  //   })
+  //   console.log(similarItems)
+  // }
 
   // const teamMatchCheck = (arr1, arr2) => {
   //   const matchingItems = []
@@ -75,7 +78,7 @@ function ItemShow() {
           </Row>
           <Row>
             <Col>
-              <img src={item.image} alt={item.name} />
+              <img className="show-image" src={item.image} alt={item.name} />
             </Col>
             <Col>
               <h2>{item.playerName}</h2>
@@ -83,7 +86,7 @@ function ItemShow() {
               <p>{item.description}</p>
               <p>Condition: {item.condition}</p>
               <h2>£{item.price}</h2>
-              <Button>Add to cart</Button>
+              <Button onClick={handleClick}>Add to cart</Button>
             </Col>
           </Row>
         </Container>
@@ -91,7 +94,7 @@ function ItemShow() {
       } 
       <p>You might also like</p>
       <div className="card-deck">
-        {items && findSimilarItems(items)}
+        {/* {items &&} */}
       </div>
     </div>    
   )

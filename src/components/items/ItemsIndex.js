@@ -40,7 +40,6 @@ function ItemsIndex() {
 
   const handleSearch = (e) => {
     setSearchValue(e.target.value)
-    console.log(e.target.value)
   }
 
   const filteredItems = () => {
@@ -59,7 +58,7 @@ function ItemsIndex() {
       behavior: 'smooth',
     })
   }
-  console.log(items)
+
   return (
     <section className="Container">
       <div>  
