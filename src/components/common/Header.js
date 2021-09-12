@@ -7,8 +7,13 @@ function Header() {
     <Navbar bg="light" expand="lg">
       <Container>
         <LinkContainer to='/'>
-          <Navbar.Brand>Swap Shop</Navbar.Brand>
+          <Navbar.Brand>SWAPxSHOP</Navbar.Brand>
         </LinkContainer>
+        <LinkContainer to='/items/'>
+          <Nav.Link>
+            Shop
+          </Nav.Link>
+        </LinkContainer>  
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
