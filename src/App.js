@@ -6,8 +6,10 @@ import Home from './components/common/Home'
 import ItemShow from './components/items/ItemShow'
 import Header from './components/common/Header'
 import Footer from './components/common/Footer'
+import Cart from './components/cart/Cart'
 
 function App() {
+  const [cartItems, setCartItems] = React.useState([])
 
   return (
     <BrowserRouter>
@@ -17,10 +19,16 @@ function App() {
           <Home />
         </Route>
         <Route path="/items/:itemId">
-          <ItemShow />
+          <ItemShow 
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+          />
         </Route>  
         <Route path="/items">
           <ItemsIndex />
+        </Route>
+        <Route path="/cart">
+          <Cart cartItems={cartItems}/>
         </Route>
       </Switch>
       <Footer />

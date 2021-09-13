@@ -5,13 +5,14 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { getAllItems, getSingleItem } from '../lib/api'
 // import ItemCard from './ItemCard'
 
-function ItemShow() {
+function ItemShow({ setCartItems, cartItems }) {
 
   const { itemId } = useParams()
   const [item, setItem] = React.useState(null)
   const [items, setItems] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !item && !isError
+  const [cart, setCart] = React.useState([])
 
   React.useEffect(()=> {
     const getData = async () => {
@@ -37,9 +38,13 @@ function ItemShow() {
     getData()
   }, [])
 
-  const handleClick = () => {
+  const addToCart = () => {
     console.log('add to cart')
+    setCartItems(item)
+    console.log('Item show', cartItems)
   }
+
+ 
   // * Work to try and display similar items based on teamName
   // let similarItems = []
   // const findSimilarItems = () => {
@@ -86,7 +91,7 @@ function ItemShow() {
               <p>{item.description}</p>
               <p>Condition: {item.condition}</p>
               <h2>£{item.price}</h2>
-              <Button onClick={handleClick}>Add to cart</Button>
+              <Button onClick={addToCart}>Add to cart</Button>
             </Col>
           </Row>
         </Container>
