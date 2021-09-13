@@ -13,7 +13,7 @@ function ItemCard({ item }) {
       <div className="card-body">
         <h5 className="card-title">{item.playerName}</h5>
         <p className="card-text">{item.condition}</p>
-        <p className="card-text">{item.price}</p>
+        <p className="card-text">£{item.price}</p>
       </div>
     </div>  
     // </Link>       
