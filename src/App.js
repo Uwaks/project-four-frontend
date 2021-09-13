@@ -1,8 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import ItemsIndex from './components/items/ItemsIndex'
 import Home from './components/common/Home'
+import ItemsIndex from './components/items/ItemsIndex'
+import ItemCreate from './components/items/ItemCreate'
 import ItemShow from './components/items/ItemShow'
 import Header from './components/common/Header'
 import Footer from './components/common/Footer'
@@ -20,6 +21,9 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route exact path="/items/new/">
+          <ItemCreate />
+        </Route> 
         <Route path="/items/:itemId">
           <ItemShow 
             cartItems={cartItems}
@@ -35,7 +39,7 @@ function App() {
         <Route path="/auth/register">
           <Register />
         </Route>
-        <Route path="/auth/login">
+        <Route path="/auth/login/">
           <Login />
         </Route>
       </Switch>

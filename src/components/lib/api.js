@@ -14,6 +14,10 @@ export function getSingleItem(itemId) {
 
 // * AUTH Requests
 
-export function registerUser(formdata) {
-  return axios.post(`${baseURL}/auth/register/`, formdata)
+export function registerUser(formData) {
+  return axios.post(`${baseURL}/auth/register/`, formData)
+}
+
+export function loginUser(formData) {
+  return axios.post(`${baseURL}/auth/login/`, formData)
 }
