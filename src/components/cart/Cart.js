@@ -1,25 +1,27 @@
 import React from 'react'
 
-function Cart({ cartItems }) {
-  // const [cartItems, setCartItems] = React.useState([])
-  
-  // const addToCart = () => {
-  //   setCartItems([...cartItems, item])
-  // }
-  console.log(cartItems)
+function Cart() {
+  const cart = JSON.parse(localStorage.getItem('cartItem')) || []  
+  console.log(cart) 
+  console.log(cart.length) 
+
   return (
     <section>
-      <h1>Cart items = {cartItems}</h1>
-      {/* <div>
-        {cartItems.length === 0 && (
+      {console.log('This is the cart', cart)}
+      <div>
+        {cart.length === 0 && (
           <div>Your cart is empty</div>
         )}
       </div>
-      {cartItems.map(item => (
-        <div key={item.id}>
-          <CartItem />
-        </div>
-      ))} */}
+      <div>
+        {cart.map(item => (
+          <div key={item.id}>
+            <img src={item.image} alt={item.playerName}/>
+            <div>{item.playerName}</div>
+            <div>{item.price}</div>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }

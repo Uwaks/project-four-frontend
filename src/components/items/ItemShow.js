@@ -5,7 +5,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { getAllItems, getSingleItem } from '../lib/api'
 // import ItemCard from './ItemCard'
 
-function ItemShow({ setCartItems, cartItems }) {
+function ItemShow() {
 
   const { itemId } = useParams()
   const [item, setItem] = React.useState(null)
@@ -26,25 +26,25 @@ function ItemShow({ setCartItems, cartItems }) {
     getData()
   },[itemId])
 
-  React.useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await getAllItems()
-        setItems(response.data)
-      } catch (err) {
-        setIsError(true)
-      }
-    }
-    getData()
-  }, [])
+  // React.useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const response = await getAllItems()
+  //       setItems(response.data)
+  //     } catch (err) {
+  //       setIsError(true)
+  //     }
+  //   }
+  //   getData()
+  // }, [])
 
+  // ** setting item into state & adding to local storage **
   const addToCart = () => {
-    console.log('add to cart')
-    setCartItems(item)
-    console.log('Item show', cartItems)
+    const cartItem = [...cart, item]
+    localStorage.setItem('cartItem', JSON.stringify(cartItem))
   }
 
- 
+
   // * Work to try and display similar items based on teamName
   // let similarItems = []
   // const findSimilarItems = () => {
