@@ -1,6 +1,13 @@
 import axios from 'axios'
+import { getToken } from './auth'
 
 const baseURL = '/api'
+
+export function getHeaders() {
+  return {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  }
+}
 
 // * ITEM Requests
 
@@ -10,6 +17,10 @@ export function getAllItems() {
 
 export function getSingleItem(itemId) {
   return axios.get(`${baseURL}/items/${itemId}`)
+}
+
+export function createItem(formData) {
+  return axios.post(`${baseURL}/items/new/`, formData, getHeaders())
 }
 
 // * AUTH Requests

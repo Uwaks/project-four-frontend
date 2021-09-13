@@ -36,10 +36,10 @@ function Register() {
 
   return (
     <section>
-      <h1>This is the register user page</h1>
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="inputPassword">Username</label>
+          <label htmlFor="username">Username</label>
           <input 
             type="username" 
             className="form-control" 
@@ -63,18 +63,6 @@ function Register() {
           />  
           <small className="form-text text-muted">We never share your email with anyone else.</small>
         </div>
-        <div className="form-group">
-          <label htmlFor="profileImage">Profile Image</label>
-          <input 
-            type="file" 
-            className="form-control" 
-            id="profileImage"
-            placeholder="Profile Image"
-            onChange={handleChange}
-            name="profileImage"
-            value={formData.profileImage}
-          /> 
-        </div> 
         <div className="form-group">
           <label htmlFor="inputPassword">Password</label>
           <input 

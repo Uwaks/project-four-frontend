@@ -87,7 +87,7 @@ function ItemShow({ setCartItems, cartItems }) {
             </Col>
             <Col>
               <h2>{item.playerName}</h2>
-              <h3>About</h3>
+              <h3>About this kit:</h3>
               <p>{item.description}</p>
               <p>Condition: {item.condition}</p>
               <h2>£{item.price}</h2>
