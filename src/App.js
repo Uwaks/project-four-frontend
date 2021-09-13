@@ -11,8 +11,6 @@ import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 
 function App() {
-  const [cartItems, setCartItems] = React.useState([])
-
   return (
     <BrowserRouter>
       <Header />
@@ -21,16 +19,13 @@ function App() {
           <Home />
         </Route>
         <Route path="/items/:itemId">
-          <ItemShow 
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-          />
+          <ItemShow />
         </Route>  
         <Route path="/items">
           <ItemsIndex />
         </Route>
         <Route path="/cart">
-          <Cart cartItems={cartItems}/>
+          <Cart />
         </Route>
         <Route path="/auth/register">
           <Register />
