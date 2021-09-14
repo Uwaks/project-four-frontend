@@ -1,15 +1,13 @@
 import React from 'react'
 import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Toast } from 'react-bootstrap'
 
 import { getAllItems, getSingleItem, getUserProfile, likeItem } from '../lib/api'
 import { isAuthenticated } from '../lib/auth'
 import ItemCard from './ItemCard'
 
 function ItemShow() {
-  
-
   const { itemId } = useParams()
   const history = useHistory()
   const isAuth = isAuthenticated()
@@ -26,6 +24,10 @@ function ItemShow() {
     return []
   })
   const sameTeamArray = []
+  const [showB, setShowB] = React.useState(true)
+
+
+  const toggleShowB = () => setShowB(!showB)
   
 
   React.useEffect(()=> {
@@ -191,7 +193,28 @@ function ItemShow() {
             Login to Comment  
           </Button>  
         </div>  
-      )}  
+      )} 
+
+      <Col xs={6} className="my-1">
+        <Toast onClose={toggleShowB} show={showB} animation={false}>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+        </Toast>
+      </Col>
+      <Col xs={6}>
+        <Button onClick={toggleShowB}>
+          Toggle Toast <strong>without</strong> Animation
+        </Button>
+      </Col>
+      
     </div>    
   )
 }
