@@ -35,6 +35,7 @@ function ItemsIndex() {
     } else {
       comparison = -1
     }
+    console.log('comparison', comparison)
     return comparison
   }
 

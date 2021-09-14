@@ -1,6 +1,33 @@
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+.jumbotron {
+  background-image: url('../assets/abigail-keenan-8-s5QuUBtyM-unsplash-1.jpg');
+  background-repeat: no-repeat, repeat;
+  background-position: center;
+  background-size: cover;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  padding: 100px;
+  border-radius: 50px;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  height: 80vh;
+  width: 95vw;
+  color: white;
+
+  .jumbo-div {
+    display: flex;
+    justify-content: center;
+
+    h1 {
+      padding-top: 50px;
+      font-size: 100px;
+    }
+  }
+}
+
+
 .card-deck {
   display: flex;
   flex-direction: row;

@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import { createItem } from '../lib/api'
+import ImageUpload from '../common/ImageUpload'
 
 
 function ItemCreate() {
@@ -29,6 +30,10 @@ function ItemCreate() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
     setFormErrors({ ...formErrors, [e.target.name]: '' })
+  }
+
+  const handleUploadedImage = (imageURL) => {
+    setFormData({ ...formData, image: imageURL })
   }
 
   const handleSubmit = async (e) => {
@@ -130,16 +135,11 @@ function ItemCreate() {
           </div>             
         </div>
         <div className="form-group">
-          <label htmlFor="profileImage">Upload a pic of your kit</label>
-          <input 
-            type="file" 
-            className="form-control" 
-            id="image"
-            placeholder="Upload a pic of your kit"
-            onChange={handleChange}
-            name="image"
-            value={formData.image}
-          /> 
+          <label htmlFor="image">Kit Image</label>
+          <ImageUpload 
+            value={formData.image}  
+            onChange={handleUploadedImage}
+          />
         </div>
         <div className="form-group">
           <label htmlFor="price">Price</label>
