@@ -43,6 +43,11 @@ function Cart() {
         ))}
         <Col>
           <div>
+          Total: £<span> {cart.reduce((sum, price) => {
+              return sum + Number(price.price)
+            }, 0)}</span>
+          </div>
+          <div>
             <Button onClick={checkout}>Proceed to Checkout</Button>
           </div>
         </Col>
