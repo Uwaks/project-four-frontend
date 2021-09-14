@@ -36,6 +36,7 @@ function Home() {
 
   items ? filterItems() : console.log('no items')
 
+  
   return (
     <Container>
       <div className="row">
@@ -50,18 +51,15 @@ function Home() {
       <div>
         {items && (
           recentlyAdded.map(item => {
-            item.map(card => {
-              return (
-                <div key={card.id}>
-                  <p>{card.playerName}</p>
-                  <Link key={card.id} to={`/items/${card.id}`}>
-                    <ItemCard card={ item } />
-                  </Link> 
-                </div>                
-              )
-            })  
-          })
-        )}
+            return (
+              item.slice(0, 4).map(card => (  
+                <Link key={card.id} to={`items/${card.id}/`}>   
+                  <ItemCard item={ card } />
+                </Link>  
+              ))
+            ) 
+          })  
+        )}    
       </div>
     </Container>
   )
