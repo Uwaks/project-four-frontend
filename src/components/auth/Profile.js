@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { getUserProfile } from '../lib/api'
 import ItemCard from '../items/ItemCard'
@@ -35,7 +36,15 @@ function Profile() {
             {user.likedItems.length === 0 ?
               <p>No favorites yet.</p>
               :
-              <p>map through favorites here</p>
+              <div>
+                {user.likedItems.map(item => {
+                  return (
+                    <Link to={`/items/${item.id}`} key={item.id}>
+                      <ItemCard item={item} />
+                    </Link>
+                  )
+                })}
+              </div>
             }
           </div>
           <div className="row">
@@ -43,15 +52,31 @@ function Profile() {
             {user.itemBought.length === 0 ?
               <p>No purchases yet.</p>
               :
-              <p>map through item bought here</p>
+              <div>
+                {user.itemBought.map(item => {
+                  return (
+                    <Link to={`/items/${item.id}`} key={item.id}>
+                      <ItemCard item={item} />
+                    </Link>
+                  )
+                })}
+              </div>
             }
           </div>
           <div className="row">
             <h3>Kits you have listed for sale:</h3>
             {user.itemToSell.length === 0 ?
-              <p>You haven&apos;t listed any kits yet.</p>
+              <p>You have not listed any kits yet.</p>
               :
-              <p>Map through the items for sale here</p>
+              <div>
+                {user.itemToSell.map(item => {
+                  return (
+                    <Link to={`/items/${item.id}`} key={item.id}>
+                      <ItemCard item={item} />
+                    </Link>
+                  )
+                })}
+              </div>
             }
           </div>
         </div>

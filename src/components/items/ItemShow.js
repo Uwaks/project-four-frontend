@@ -206,7 +206,7 @@ function ItemShow() {
             <strong className="me-auto">Bootstrap</strong>
             <small>11 mins ago</small>
           </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
+          <Toast.Body>Woohoo, you are reading this text in a Toast!</Toast.Body>
         </Toast>
       </Col>
       <Col xs={6}>
