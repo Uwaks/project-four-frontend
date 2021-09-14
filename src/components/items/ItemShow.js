@@ -1,17 +1,18 @@
 import React from 'react'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 
 import { getAllItems, getSingleItem } from '../lib/api'
+import { isAuthenticated } from '../lib/auth'
 import ItemCard from './ItemCard'
-// import ItemCard from './ItemCard'
-// const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItem') || '[]')
 
 function ItemShow() {
   
 
   const { itemId } = useParams()
+  const history = useHistory()
+  const isAuth = isAuthenticated()
   const [item, setItem] = React.useState(null)
   const [items, setItems] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
@@ -24,6 +25,7 @@ function ItemShow() {
     return []
   })
   const sameTeamArray = []
+  
 
   React.useEffect(()=> {
     const getData = async () => {
@@ -61,6 +63,16 @@ function ItemShow() {
     ))
     
   }
+  const handleComment = () => {
+    console.log('itemId', itemId)
+    console.log('history', history)
+    history.push(`/items/${itemId}/comments`)
+  }
+
+  const handleLogin = () => {
+    history.push('/auth/login/')
+  }
+
 
   // * Work to try and display similar items based on teamName
   const teamMatchCheck = (arr1, arr2) => {
@@ -122,8 +134,40 @@ function ItemShow() {
             }
           </div>
         </div> 
-      )} 
-      
+      )}
+      {item?.comments.length === 0 ? 
+        <p>No comments yet</p> 
+        :
+        item?.comments.map(comment => {
+          return (
+            <div key={comment.id}>
+              <p>{comment.text}</p>
+              <p>{comment.owner.username}</p>
+              <p>{comment.createdAt}</p>
+            </div> 
+          )
+        })
+      }
+      {isAuth && (
+        <div>
+          <Button 
+            className="Button is-info"
+            onClick={handleComment}
+          >
+        Leave a Comment
+          </Button>  
+        </div>
+      )}
+      {!isAuth && (
+        <div>
+          <Button 
+            className="Button is-info"
+            onClick={handleLogin}
+          >
+            Login to Comment  
+          </Button>  
+        </div>  
+      )}  
     </div>    
   )
 }
