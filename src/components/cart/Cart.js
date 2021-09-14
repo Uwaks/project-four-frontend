@@ -7,7 +7,6 @@ function Cart() {
   const cart = JSON.parse(localStorage.getItem('cartItem')) || []  
 
   const removeFromCart = () => {
-    console.log(cart)
     // localStorage.removeItem()
   }
 

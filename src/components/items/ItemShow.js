@@ -6,15 +6,23 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { getAllItems, getSingleItem } from '../lib/api'
 import ItemCard from './ItemCard'
 // import ItemCard from './ItemCard'
+// const cartFromLocalStorage = JSON.parse(localStorage.getItem('cartItem') || '[]')
 
 function ItemShow() {
+  
 
   const { itemId } = useParams()
   const [item, setItem] = React.useState(null)
   const [items, setItems] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !item && !isError
-  const [cart, setCart] = React.useState([])
+  const [cartItems, setCartItems] = React.useState(() => {
+    const inStorage = localStorage.getItem('cartItem')
+    if (inStorage) {
+      return JSON.parse(inStorage)
+    }
+    return []
+  })
   const sameTeamArray = []
 
   React.useEffect(()=> {
@@ -33,12 +41,26 @@ function ItemShow() {
 
   
 
+  React.useEffect(() => {
+    localStorage.setItem('cartItem', JSON.stringify(cartItems))
+  }, [cartItems])
+
   // ** setting item into state & adding to local storage **
   const addToCart = () => {
-    const cartItem = [...cart, item]
-    localStorage.setItem('cartItem', JSON.stringify(cartItem))
+    setCartItems([...cartItems, item])
+    // localStorage.setItem('cartItem', JSON.stringify(cartItems))
   }
 
+  const removeFromCart = () => {
+    
+    setCartItems(cartItems.filter(cartItem => {
+      console.log('cartItem.id', cartItem.id) 
+      console.log('itemId', itemId)
+      return Number(cartItem.id) !== Number(itemId)
+    }
+    ))
+    
+  }
 
   // * Work to try and display similar items based on teamName
   const teamMatchCheck = (arr1, arr2) => {
@@ -80,6 +102,7 @@ function ItemShow() {
               <p>Condition: {item.condition}</p>
               <h2>£{item.price}</h2>
               <Button onClick={addToCart}>Add to cart</Button>
+              <Button onClick={removeFromCart}>Remove Item</Button>
             </Col>
           </Row>
         </Container>
