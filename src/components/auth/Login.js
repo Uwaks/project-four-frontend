@@ -25,7 +25,7 @@ function Login() {
     try {
       const { data } = await loginUser(formData)
       setToken(data.token)
-      history.push('/cart')
+      history.push('/items')
     } catch (err) {
       setIsError(true)
     }

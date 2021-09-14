@@ -10,6 +10,7 @@ import Footer from './components/common/Footer'
 import Cart from './components/cart/Cart'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
+import Checkout from './components/cart/Checkout'
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </Route>  
         <Route path="/items">
           <ItemsIndex />
+        </Route>
+        <Route path="/cart/checkout">
+          <Checkout />
         </Route>
         <Route path="/cart">
           <Cart />

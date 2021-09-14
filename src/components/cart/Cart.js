@@ -1,9 +1,20 @@
 import React from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 function Cart() {
+  const history = useHistory()
   const cart = JSON.parse(localStorage.getItem('cartItem')) || []  
-  console.log(cart) 
-  console.log(cart.length) 
+
+  const removeFromCart = () => {
+    console.log(cart)
+    // localStorage.removeItem()
+  }
+
+  const checkout = () => {
+    console.log('Clicked')
+    history.push('/cart/checkout')
+  }
 
   return (
     <section>
@@ -13,17 +24,31 @@ function Cart() {
           <div>Your cart is empty</div>
         )}
       </div>
+      
       <div>
         {cart.map(item => (
-          <div key={item.id}>
-            <img src={item.image} alt={item.playerName}/>
-            <div>{item.playerName}</div>
-            <div>{item.price}</div>
-          </div>
+          <Container key={item.id}>
+            <Row>
+              <Col>
+                <Link  to={`/items/${item.id}/`}>
+                  <img src={item.image} alt={item.playerName}/>
+                </Link>
+              </Col>
+              <Col>
+                <div>{item.playerName}</div>
+                <div>{item.price}</div>
+                <Button onClick={removeFromCart}>Remove item</Button>
+              </Col>
+            </Row>
+          </Container>
         ))}
-      </div>
+        <Col>
+          <div>
+            <Button onClick={checkout}>Proceed to Checkout</Button>
+          </div>
+        </Col>
+      </div>  
     </section>
   )
 }
-
 export default Cart
