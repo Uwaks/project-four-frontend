@@ -23,8 +23,16 @@ export function createItem(formData) {
   return axios.post(`${baseURL}/items/new/`, formData, getHeaders())
 }
 
+// * COMMENT Requests
+
 export function createComment(id, formData) {
   return axios.post(`${baseURL}/items/${id}/comments/`, formData, getHeaders())
+}
+
+// * FAVORITE/LIKE Request
+
+export function likeItem(itemId) {
+  return axios.post(`${baseURL}/items/${itemId}/like/`, null, getHeaders())
 }
 
 // * AUTH Requests

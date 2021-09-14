@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 
-import { getAllItems, getSingleItem } from '../lib/api'
+import { getAllItems, getSingleItem, getUserProfile, likeItem } from '../lib/api'
 import { isAuthenticated } from '../lib/auth'
 import ItemCard from './ItemCard'
 
@@ -15,6 +15,7 @@ function ItemShow() {
   const isAuth = isAuthenticated()
   const [item, setItem] = React.useState(null)
   const [items, setItems] = React.useState(null)
+  const [currentUser, setCurrentUser] = React.useState(null)
   const [isError, setIsError] = React.useState(false)
   const isLoading = !item && !isError
   const [cartItems, setCartItems] = React.useState(() => {
@@ -34,14 +35,14 @@ function ItemShow() {
         setItem(response.data)
         const res = await getAllItems()       
         setItems(res.data)
+        const resp = await getUserProfile()
+        setCurrentUser(resp.data)
       } catch (err) {
         setIsError(true)
       }
     }
     getData()
   }, [itemId])
-
-  
 
   React.useEffect(() => {
     localStorage.setItem('cartItem', JSON.stringify(cartItems))
@@ -61,8 +62,9 @@ function ItemShow() {
       return Number(cartItem.id) !== Number(itemId)
     }
     ))
-    
   }
+
+  // * Comment Handlers
   const handleComment = () => {
     console.log('itemId', itemId)
     console.log('history', history)
@@ -73,8 +75,23 @@ function ItemShow() {
     history.push('/auth/login/')
   }
 
+  // * Like/Favorite Handlers
 
-  // * Work to try and display similar items based on teamName
+  const isLiked = item?.likedBy.some(like => {
+    return like.id === currentUser?.id
+  })
+
+  const handleLike = async () => {
+    try { 
+      await likeItem(itemId, item)
+      const response = await getSingleItem(itemId)
+      setItem(response.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // * Function to display similar items based on teamName
   const teamMatchCheck = (arr1, arr2) => {
     const matchingTeams = []
     const filteredArray = arr1.filter(kit => {
@@ -114,6 +131,13 @@ function ItemShow() {
               <p>Condition: {item.condition}</p>
               <h2>£{item.price}</h2>
               <Button onClick={addToCart}>Add to cart</Button>
+              {isAuth ?
+                <Button onClick={handleLike}>
+                  {isLiked ? 'unlike' : '🤍'}</Button>
+                :
+                <Button onClick={handleLogin}>login to 🤍</Button>
+              }
+              
               <Button onClick={removeFromCart}>Remove Item</Button>
             </Col>
           </Row>
