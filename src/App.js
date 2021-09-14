@@ -11,6 +11,8 @@ import Cart from './components/cart/Cart'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import Checkout from './components/cart/Checkout'
+import ItemComment from './components/items/ItemComment'
+import Profile from './components/auth/Profile'
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         </Route>
         <Route exact path="/items/new/">
           <ItemCreate />
+        </Route> 
+        <Route exact path="/items/:itemId/comments/">
+          <ItemComment />
         </Route> 
         <Route path="/items/:itemId">
           <ItemShow />
@@ -40,6 +45,9 @@ function App() {
         </Route>
         <Route path="/auth/login/">
           <Login />
+        </Route>
+        <Route path="/auth/profile/">
+          <Profile />
         </Route>
       </Switch>
       <Footer />

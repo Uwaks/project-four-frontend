@@ -27,7 +27,9 @@ function Login() {
       setToken(data.token)
       history.push('/items')
     } catch (err) {
+      window.alert('Username or password was not recognized. Please, try again.')
       setIsError(true)
+      console.log(isError)
     }
   }
 

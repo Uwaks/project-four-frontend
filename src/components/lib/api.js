@@ -23,6 +23,10 @@ export function createItem(formData) {
   return axios.post(`${baseURL}/items/new/`, formData, getHeaders())
 }
 
+export function createComment(id, formData) {
+  return axios.post(`${baseURL}/items/${id}/comments/`, formData, getHeaders())
+}
+
 // * AUTH Requests
 
 export function registerUser(formData) {
@@ -31,4 +35,8 @@ export function registerUser(formData) {
 
 export function loginUser(formData) {
   return axios.post(`${baseURL}/auth/login/`, formData)
+}
+
+export function getUserProfile() {
+  return axios.get(`${baseURL}/auth/profile/`, getHeaders())
 }
