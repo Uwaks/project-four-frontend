@@ -208,13 +208,6 @@ function ItemShow() {
           </Button>  
         </div>  
       )} 
-
-      
-      <Col xs={6}>
-        {/* <Button onClick={toggleShowB}>
-          Toggle Toast <strong>without</strong> Animation
-        </Button> */}
-      </Col>
       
     </div>    
   )
