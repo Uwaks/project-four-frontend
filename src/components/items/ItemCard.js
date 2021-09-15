@@ -1,10 +1,9 @@
-// import { Link } from 'react-router-dom'
+
 
 function ItemCard({ item }) {
 
   
   return (
-    // <Link key={item.id} to={`/items/${item.id}`}>
     <div className="card"> 
       <div className="card-header">
         {item.teamName}
@@ -14,11 +13,7 @@ function ItemCard({ item }) {
         <h5 className="card-title">{item.playerName}</h5>
         <p className="card-text">£{item.price}</p>
       </div>
-    </div>  
-    // </Link>       
-
-    
-    
+    </div>   
   )
 }
 

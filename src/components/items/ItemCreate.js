@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Container, Row } from 'react-bootstrap'
 import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 
@@ -72,116 +72,124 @@ function ItemCreate() {
   }
 
   return (
-    <section>
-      <h1>Sell Your Kit!</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="teamName">Team</label>
-          <Select
-            options={teamOptions}
-            defaultValue={teamOptions[0]}
-            onChange={selected =>
-              handleSelect(selected, 'teamName')
-            }
-          />
-        </div>  
-        <div className="form-group">
-          <label htmlFor="playerName">Player Name</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            id="playerName"
-            placeholder="Player Name - if none, state None. "
-            onChange={handleChange}
-            name="playerName"
-            value={formData.playerName}
-          /> 
-        </div> 
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <Form.Control  
-            type="textarea" 
-            as="textarea"
-            rows={3}
-            className="form-control textarea" 
-            id="description"
-            placeholder="Describe your kit."
-            onChange={handleChange}
-            name="description"
-            value={formData.description}
-          /> 
-        </div>
-        <div className="form-group">
-          <label htmlFor="condition">Condition</label>
-          <div>
-            <Form.Check
-              inline
-              label="Good"
-              name="condition"
-              value="good"
-              onChange={handleChange}
-              checked={formData.condition === 'good'}
-            />  
-            <Form.Check
-              inline
-              label="Very Good"
-              name="condition"
-              value="veryGood"
-              onChange={handleChange}
-              checked={formData.condition === 'veryGood'}
-            /> 
-            <Form.Check
-              inline
-              label="Excellent"
-              name="condition"
-              value="excellent"
-              onChange={handleChange}
-              checked={formData.condition === 'excellent'}
-            /> 
-            <Form.Check
-              inline
-              label="Mint"
-              name="condition"
-              value="mint"
-              onChange={handleChange}
-              checked={formData.condition === 'mint'}
+    <Container className="form-container">
+      <Row className="register-wrapper">
+        <h1 className="comment-title">Sell your kit!</h1>
+      </Row>
+      <Row className="register-wrapper">
+        <form onSubmit={handleSubmit} className="form-wrapper">
+          <div className="form-group">
+            <label htmlFor="teamName">Team</label>
+            <Select
+              options={teamOptions}
+              defaultValue={teamOptions[0]}
+              onChange={selected =>
+                handleSelect(selected, 'teamName')
+              }
             />
-            <Form.Check
-              inline
-              label="Match Worn"
-              name="condition"
-              value="matchWorn"
+          </div>  
+          <div className="form-group">
+            <label htmlFor="playerName">Player Name</label>
+            <input 
+              type="text" 
+              className="form-control" 
+              id="playerName"
+              placeholder="Player Name - if none, state None. "
               onChange={handleChange}
-              checked={formData.condition === 'matchWorn'}
-            />  
-          </div>             
-        </div>
-        <div className="form-group">
-          <label htmlFor="image">Kit Image</label>
-          <ImageUpload 
-            value={formData.image}  
-            onChange={handleUploadedImage}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="price">Price</label>
-          <input 
-            type="number" 
-            className="form-control" 
-            id="price"
-            placeholder="Price"
-            onChange={handleChange}
-            name="price"
-            value={formData.price}
-          /> 
-        </div> 
-        < div className="field">
-          <Button variant="primary" type="submit" className="Button">
+              name="playerName"
+              value={formData.playerName}
+            /> 
+          </div> 
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <Form.Control  
+              type="textarea" 
+              as="textarea"
+              rows={3}
+              className="form-control textarea" 
+              id="description"
+              placeholder="Describe your kit."
+              onChange={handleChange}
+              name="description"
+              value={formData.description}
+            /> 
+          </div>
+          <div className="form-group">
+            <label htmlFor="condition">Condition</label>
+            <div>
+              <Form.Check
+                inline
+                label="Good"
+                name="condition"
+                value="good"
+                onChange={handleChange}
+                checked={formData.condition === 'good'}
+              />  
+              <Form.Check
+                inline
+                label="Very Good"
+                name="condition"
+                value="veryGood"
+                onChange={handleChange}
+                checked={formData.condition === 'veryGood'}
+              /> 
+              <Form.Check
+                inline
+                label="Excellent"
+                name="condition"
+                value="excellent"
+                onChange={handleChange}
+                checked={formData.condition === 'excellent'}
+              /> 
+              <Form.Check
+                inline
+                label="Mint"
+                name="condition"
+                value="mint"
+                onChange={handleChange}
+                checked={formData.condition === 'mint'}
+              />
+              <Form.Check
+                inline
+                label="Match Worn"
+                name="condition"
+                value="matchWorn"
+                onChange={handleChange}
+                checked={formData.condition === 'matchWorn'}
+              />  
+            </div>             
+          </div>
+          <div className="form-group">
+            <label htmlFor="image">Kit Pic</label>
+            <ImageUpload 
+              value={formData.image}  
+              onChange={handleUploadedImage}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="price">Price</label>
+            <input 
+              type="number" 
+              className="form-control" 
+              id="price"
+              placeholder="Price"
+              onChange={handleChange}
+              name="price"
+              value={formData.price}
+            /> 
+          </div> 
+          < div className="field">
+            <Button 
+              variant="secondary" 
+              type="submit" 
+              className="btn btn-block"
+            >
                 Sell my kit!
-          </Button>
-        </div> 
-      </form>
-    </section>  
+            </Button>
+          </div> 
+        </form>
+      </Row>
+    </Container>  
   )
 }
 

@@ -131,7 +131,7 @@
   padding: auto 100px;
 }
 
-// * Register/Login Page
+// * Register/Login/SellKit Pages
 .register-wrapper {
   justify-content: center;
 }
@@ -151,6 +151,51 @@
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+// * PROFILE PAGE
+
+.account-wrapper {
+  justify-content: space-evenly;
+  color: #7c7c7d;
+  .profile-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    
+  }
+}
+  
+
+.liked-card-deck {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+
+  .liked-card {
+    width: 7rem;
+    margin-top: 10px;
+    margin-inline: 5px;
+    font-size: 12px;
+  }
+  a {
+    color: #7c7c7d;
+  }
+  h5 {
+    font-size: 12px;
+  }
+  a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  img {
+    width: 100%;
+    height: 8rem;
+  }
+  
 }
 
 // * FOOTER 
