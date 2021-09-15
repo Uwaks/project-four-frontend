@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-import { Container, Jumbotron } from 'react-bootstrap'
+import { Container, Jumbotron, Carousel } from 'react-bootstrap'
 import ItemCard from '../items/ItemCard'
 
 import { getAllItems } from '../lib/api'
@@ -38,30 +38,35 @@ function Home() {
 
   
   return (
-    <Container>
-      <div className="row">
-        {isError && <p>Oops! Something went wrong 😢</p>}
-        {isLoading && <p>...loading</p>}       
-        <Jumbotron>      
-          <div className="jumbo-div">
-            <h1>SWAPxSHOP</h1>     
-          </div>   
-        </Jumbotron>
-      </div>
-      <div>
-        {items && (
-          recentlyAdded.map(item => {
-            return (
-              item.slice(0, 4).map(card => (  
-                <Link key={card.id} to={`items/${card.id}/`}>   
-                  <ItemCard item={ card } />
-                </Link>  
-              ))
-            ) 
-          })  
-        )}    
-      </div>
-    </Container>
+    <>
+      
+
+      <Container>
+        <div className="row">
+          {isError && <p>Oops! Something went wrong 😢</p>}
+          {isLoading && <p>...loading</p>}       
+          <Jumbotron>      
+            <div className="jumbo-div">
+              <h1>SWAPxSHOP</h1>     
+            </div>   
+          </Jumbotron>
+        </div>
+        <div>
+          {items && (
+            recentlyAdded.map(item => {
+              return (
+                item.slice(0, 4).map(card => (  
+                  <Link key={card.id} to={`items/${card.id}/`}>   
+                    <ItemCard item={ card } />
+                  </Link>  
+                ))
+              ) 
+            })  
+          )}    
+        </div>
+      </Container>
+    </>
+    
   )
 }
 

@@ -30,13 +30,16 @@ function Header() {
         <LinkContainer to='/'>
           <Navbar.Brand>SWAPxSHOP</Navbar.Brand>
         </LinkContainer>
-        <LinkContainer to='/items/'>
-          <Nav.Link>
-            Shop
-          </Nav.Link>
-        </LinkContainer>  
+          
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
+
+          <LinkContainer to='/items/'>
+            <Nav.Link>
+            Shop
+            </Nav.Link>
+          </LinkContainer>
+        
           <Nav className="ml-auto">
             
             <LinkContainer to='/cart'>

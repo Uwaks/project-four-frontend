@@ -53,6 +53,8 @@ function Checkout() {
   return (
     <>
       <h1>Checkout Page</h1>
+      {console.log(cart)}
+      <div>{cart.image}</div>
       
       {isAuth && (
         <Button onClick={handleClick}>Buy</Button>
