@@ -22,26 +22,26 @@ function ItemCreate() {
   const [formErrors, setFormErrors] = React.useState(initialState)
   
   const teamOptions = [
-    { value: 'arsenal', label: 'Arsenal Football Club' },
-    { value: 'aston', label: 'Aston Villa Football Club' },
-    { value: 'brentford', label: 'Brentford Football Club' },
-    { value: 'brighton', label: 'Brighton & Hove Albion Football Club' },
-    { value: 'burnley', label: 'Burnley Football Club' },
-    { value: 'chelsea', label: 'Chelsea Football Club' },
-    { value: 'crystal', label: 'Crystal Palace Football Club' },
-    { value: 'everton', label: 'Everton Football Club' },
-    { value: 'leeds', label: 'Leeds United Football Club' },
-    { value: 'leicester', label: 'Leicester City Football Club' },
-    { value: 'liverpool', label: 'Liverpool Football Club' },
-    { value: 'manchester city', label: 'Manchester City Football Club' },
-    { value: 'manchester united', label: 'Manchester United Football Club' },
-    { value: 'newcastle', label: 'Newcastle United Football Club' },
-    { value: 'norwich', label: 'Norwich City Football Club' },
-    { value: 'southampton', label: 'Southampton Football Club' },
-    { value: 'tottenham', label: 'Tottenham Hotspur Football Club' },
-    { value: 'watford', label: 'Watford Football Club' },
-    { value: 'west', label: 'West Ham United Football Club' },
-    { value: 'wolverhampton', label: 'Wolverhampton Football Club' }
+    { value: 'Arsenal FC', label: 'Arsenal Football Club' },
+    { value: 'Aston Villa FC', label: 'Aston Villa Football Club' },
+    { value: 'Brentford FC', label: 'Brentford Football Club' },
+    { value: 'Brighton & Hove FC', label: 'Brighton & Hove Albion Football Club' },
+    { value: 'Burnley FC', label: 'Burnley Football Club' },
+    { value: 'Chelsea FC', label: 'Chelsea Football Club' },
+    { value: 'Crystal Palace FC', label: 'Crystal Palace Football Club' },
+    { value: 'Everton FC', label: 'Everton Football Club' },
+    { value: 'Leeds United FC', label: 'Leeds United Football Club' },
+    { value: 'Leicester FC', label: 'Leicester City Football Club' },
+    { value: 'Liverpool FC', label: 'Liverpool Football Club' },
+    { value: 'Manchester City FC', label: 'Manchester City Football Club' },
+    { value: 'Manchester United FC', label: 'Manchester United Football Club' },
+    { value: 'Newcastle United FC', label: 'Newcastle United Football Club' },
+    { value: 'Norwich City FC', label: 'Norwich City Football Club' },
+    { value: 'Southampton FC', label: 'Southampton Football Club' },
+    { value: 'Tottenham FC', label: 'Tottenham Hotspur Football Club' },
+    { value: 'Watford FC', label: 'Watford Football Club' },
+    { value: 'West Ham United FC', label: 'West Ham United Football Club' },
+    { value: 'Wolverhampton FC', label: 'Wolverhampton Football Club' }
   ]
 
   const handleChange = (e) => {

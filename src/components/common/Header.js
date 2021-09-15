@@ -29,15 +29,16 @@ function Header() {
       <Container>
         <LinkContainer to='/'>
           <Navbar.Brand>SWAPxSHOP</Navbar.Brand>
-        </LinkContainer>
-        <LinkContainer to='/items/'>
-          <Nav.Link>
-            Shop
-          </Nav.Link>
         </LinkContainer>  
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
+            
+            <LinkContainer to='/items/'>
+              <Nav.Link>
+                <i className="fas fa-tshirt"></i>Shop
+              </Nav.Link>
+            </LinkContainer>
             
             <LinkContainer to='/cart'>
               <Nav.Link>
@@ -54,12 +55,19 @@ function Header() {
             {isAuth && (
               <LinkContainer to='/items/new/'>
                 <Nav.Link>
-                  <i className=''></i>Create New Shirt
+                  Sell My Kit
                 </Nav.Link>
               </LinkContainer>
             )}
             {isAuth && (
-              <Button onClick={logOut}>Log Out</Button>
+              <LinkContainer to='/auth/profile/'>
+                <Nav.Link>
+                  My Account
+                </Nav.Link>
+              </LinkContainer>
+            )}
+            {isAuth && (
+              <Button variant="light" className="btn-outline-secondary" onClick={logOut}>Log Out</Button>
             )}
           </Nav>
         </Navbar.Collapse>
