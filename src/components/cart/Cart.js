@@ -1,18 +1,35 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
+import { isAuthenticated } from '../lib/auth'
 
-function Cart() {
+function Cart({ setCartItems, cartItems, itemId }) {
   const history = useHistory()
-  const cart = JSON.parse(localStorage.getItem('cartItem')) || []  
+  let cart = JSON.parse(localStorage.getItem('cartItem')) || []  
+  const [isEmpty, setIsEmpty ] = React.useState(true)
+  const isAuth = isAuthenticated
+
+  React.useEffect(() => {
+    const getCart = () => {
+      if (cart.length !== 0)
+        setIsEmpty(!isEmpty)
+    }
+    getCart()
+  }, [])
 
   const removeFromCart = () => {
-    // localStorage.removeItem()
+    localStorage.removeItem('cartItem')
+    cart = []
+    setIsEmpty(!isEmpty)
   }
 
   const checkout = () => {
     console.log('Clicked')
     history.push('/cart/checkout')
+  }
+
+  const backToShop = () => {
+    history.push('/items')
   }
 
   return (
@@ -36,7 +53,7 @@ function Cart() {
               <Col>
                 <div>{item.playerName}</div>
                 <div>{item.price}</div>
-                <Button onClick={removeFromCart}>Remove item</Button>
+                <Button onClick={removeFromCart}>Empty Cart</Button>
               </Col>
             </Row>
           </Container>
@@ -47,9 +64,13 @@ function Cart() {
               return sum + Number(price.price)
             }, 0)}</span>
           </div>
-          <div>
-            <Button onClick={checkout}>Proceed to Checkout</Button>
-          </div>
+          {console.log(cart, isEmpty)}
+          {!isEmpty && (
+            <div>
+              <Button onClick={checkout}>Proceed to Checkout</Button>
+            </div>
+          )}
+          <div><Button onClick={backToShop}>Continue Shopping</Button></div>
         </Col>
       </div>  
     </section>
