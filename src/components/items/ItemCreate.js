@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
+import Select from 'react-select'
 import { useHistory } from 'react-router-dom'
 
 import { createItem } from '../lib/api'
@@ -20,17 +21,33 @@ function ItemCreate() {
   const [formData, setFormData] = React.useState(initialState)
   const [formErrors, setFormErrors] = React.useState(initialState)
   
-  // const conditionOptions = [
-  //   { value: 'good', label: 'Good' },
-  //   { value: 'excellent', label: 'Excellent' },
-  //   { value: 'veryGood', label: 'Very Good' },
-  //   { value: 'mint', label: 'Mint' },
-  //   { value: 'matchWorn', label: 'Match Worn' }
-  // ]
+  const teamOptions = [
+    { value: 'arsenal', label: 'Arsenal Football Club' },
+    { value: 'aston', label: 'Aston Villa Football Club' },
+    { value: 'brentford', label: 'Brentford Football Club' },
+    { value: 'brighton', label: 'Brighton & Hove Albion Football Club' },
+    { value: 'burnley', label: 'Burnley Football Club' },
+    { value: 'chelsea', label: 'Chelsea Football Club' },
+    { value: 'crystal', label: 'Crystal Palace Football Club' },
+    { value: 'everton', label: 'Everton Football Club' },
+    { value: 'leeds', label: 'Leeds United Football Club' },
+    { value: 'leicester', label: 'Leicester City Football Club' },
+    { value: 'liverpool', label: 'Liverpool Football Club' },
+    { value: 'manchester city', label: 'Manchester City Football Club' },
+    { value: 'manchester united', label: 'Manchester United Football Club' },
+    { value: 'newcastle', label: 'Newcastle United Football Club' },
+    { value: 'norwich', label: 'Norwich City Football Club' },
+    { value: 'southampton', label: 'Southampton Football Club' },
+    { value: 'tottenham', label: 'Tottenham Hotspur Football Club' },
+    { value: 'watford', label: 'Watford Football Club' },
+    { value: 'west', label: 'West Ham United Football Club' },
+    { value: 'wolverhampton', label: 'Wolverhampton Football Club' }
+  ]
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
     setFormErrors({ ...formErrors, [e.target.name]: '' })
+    console.log(formData)
   }
 
   const handleUploadedImage = (imageURL) => {
@@ -44,8 +61,14 @@ function ItemCreate() {
       history.push(`/items/${data.id}`)
     } catch (err) {
       setFormErrors(err.response.data.errors)
-      alert('Sorry, you are not allowed to do that. Please, login.')
+      console.log(err.response.data.errors)
     }
+  }
+
+  const handleSelect = (selected, name) => {
+    console.log('formData', formData.teamName)
+    const selectedItems = selected ? selected.value : []
+    setFormData({ ...formData, [name]: selectedItems })
   }
 
   return (
@@ -54,15 +77,13 @@ function ItemCreate() {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="teamName">Team</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            id="teamName"
-            placeholder="Team"
-            onChange={handleChange}
-            name="teamName"
-            value={formData.teamName}
-          /> 
+          <Select
+            options={teamOptions}
+            defaultValue={teamOptions[0]}
+            onChange={selected =>
+              handleSelect(selected, 'teamName')
+            }
+          />
         </div>  
         <div className="form-group">
           <label htmlFor="playerName">Player Name</label>
