@@ -1,6 +1,6 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import { useHistory, Link } from 'react-router-dom'
+import { Button, Container, Row } from 'react-bootstrap'
 
 import { loginUser } from '../lib/api'
 import { setToken } from '../lib/auth'
@@ -34,38 +34,49 @@ function Login() {
   }
 
   return (
-    <section>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="inputPassword">Username</label>
-          <input 
-            type="username" 
-            className="form-control" 
-            id="username"
-            placeholder="Username"
-            onChange={handleChange}
-            name="username"
-            value={formData.username}
-          /> 
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputPassword">Password</label>
-          <input 
-            type="password" 
-            className="form-control" 
-            id="inputPassword"
-            placeholder="Password"
-            onChange={handleChange}
-            name="password"
-            value={formData.password}
-          />    
-        </div>
-        <div className="btn-group">
-          <Button className="btn-info" type="submit">Login</Button>
-        </div>
-      </form>
-    </section>      
+    <Container className="form-container">
+      <Row className="register-wrapper">
+        <h1 className="comment-title">Login</h1>
+      </Row>   
+      <Row className="register-wrapper">     
+        <form onSubmit={handleSubmit} className="form-wrapper">
+          <div className="form-group">
+            <label htmlFor="inputPassword">Username</label>
+            <input 
+              type="username" 
+              className="form-control" 
+              id="username"
+              placeholder="Username"
+              onChange={handleChange}
+              name="username"
+              value={formData.username}
+            /> 
+          </div>
+          <div className="form-group">
+            <label htmlFor="inputPassword">Password</label>
+            <input 
+              type="password" 
+              className="form-control" 
+              id="inputPassword"
+              placeholder="Password"
+              onChange={handleChange}
+              name="password"
+              value={formData.password}
+            />    
+          </div>
+          <div className="btn-group btn-block">
+            <Button 
+              className="btn btn-block" 
+              variant="secondary"
+              type="submit"
+            >
+              Login
+            </Button>
+          </div>
+          <p className="text-center">No account? Sign up <Link to="/auth/register">here</Link>.</p>
+        </form>
+      </Row>
+    </Container>      
   )
 }
 

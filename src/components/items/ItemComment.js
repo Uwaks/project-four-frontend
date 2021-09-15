@@ -1,17 +1,33 @@
 import React from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import { useParams, useHistory } from 'react-router-dom'
 
-import { createComment } from '../lib/api'
+import { createComment, getSingleItem } from '../lib/api'
+import ItemCard from './ItemCard'
 
 function ItemComment() {
   const { itemId } = useParams()
   const history = useHistory()
+  const [item, setItem] = React.useState(null)
+  const [isError, setIsError] = React.useState(false)
+  const isLoading = !item && !isError
   const [formData, setFormData] = React.useState(
     {
       text: '',
     }
   )
+
+  React.useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await getSingleItem(itemId)
+        setItem(response.data)
+      } catch (err) {
+        setIsError(true)
+      } 
+    }
+    getData()
+  }, [])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -29,34 +45,47 @@ function ItemComment() {
   }
 
   return (
-    <section>
-      <h1>Comments</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="leave a comment">Leave a comment</label>
-          <Form.Control
-            type="textarea"
-            as="textarea"
-            rows={3}
-            className="form-control textarea"
-            id="comment"
-            placeholder="What do you think of this kit?"
-            onChange={handleChange}
-            name="text"
-            value={formData.text}
-          />  
-        </div>
-        <div className="field">
-          <Button 
-            variant="primary"
-            type="submit"
-            className="Button"
-          >
+    <Container>
+      <Row className="comments-container">
+        <Col>
+          <h1>Comments</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="leave a comment">Leave a comment</label>
+              <Form.Control
+                type="textarea"
+                as="textarea"
+                rows={3}
+                className="form-control textarea"
+                id="comment"
+                placeholder="What do you think of this kit?"
+                onChange={handleChange}
+                name="text"
+                value={formData.text}
+              />  
+            </div>
+            <div className="field">
+              <Button 
+                variant="light"
+                type="submit"
+                className="btn-outline-secondary show-btn"
+              >
             Submit  
-          </Button>   
-        </div>
-      </form>
-    </section>
+              </Button>   
+            </div>
+          </form>
+        </Col>
+        <Col>
+          {isError && <p>Something went wrong.</p>}
+          {isLoading && <p>...loading</p>}
+          {item && (
+            <Container className="item-card-container">           
+              <ItemCard item={ item } className="comment-card" />
+            </Container>
+          )}
+        </Col>
+      </Row>  
+    </Container>
   )  
 }
 

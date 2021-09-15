@@ -120,7 +120,28 @@
   margin: 3px;
 }
 
+// * FORMS STYLING
+// * Comments
+.comments-container {
+  margin: 30px auto;
+}
 
+.form-container {
+  margin: 20px auto;
+  padding: auto 100px;
+}
+
+// * Register/Login Page
+.register-wrapper {
+  justify-content: center;
+}
+
+.form-wrapper {
+  border: 1px solid #7c7c7d;
+  margin: 5px;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
 
 .visually-hidden {
   clip: rect(0 0 0 0);
