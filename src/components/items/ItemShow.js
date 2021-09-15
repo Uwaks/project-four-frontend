@@ -118,12 +118,12 @@ function ItemShow() {
       {item && (
         <Container fluid>
           <Row>
-            <Col className="text-center">
-              <h1>{item.teamName}</h1>            
+            <Col className="name-col text-center">
+              <h1 className='title'>{item.teamName}</h1>            
             </Col>  
           </Row>
           <Row>
-            <Col>
+            <Col className="image-col">
               <img className="show-image" src={item.image} alt={item.name} />
             </Col>
             <Col>
@@ -146,68 +146,100 @@ function ItemShow() {
                   <Toast.Body>Your item has been added to the cart</Toast.Body>
                 </Toast>
               </Col>
-              <Button onClick={addToCart}>Add to cart</Button>
+              <Button 
+                className="btn-outline-secondary show-btn" 
+                variant="light" 
+                onClick={addToCart}>Add to cart</Button>
               {isAuth ?
-                <Button onClick={handleLike}>
-                  {isLiked ? 'unlike' : '🤍'}</Button>
+                
+                <Button 
+                  onClick={handleLike}
+                  className="btn-outline-secondary show-btn" 
+                  variant="light" 
+                >
+                  {isLiked ? 'unlike' : 'Like'}</Button>
                 :
-                <Button onClick={handleLogin}>login to 🤍</Button>
-              }
-              
-              <Button onClick={removeFromCart}>Remove Item</Button>
+                <Button 
+                  onClick={handleLogin}
+                  className="btn-outline-secondary show-btn" 
+                  variant="light" 
+                >login to </Button>
+              }     
+              <Button 
+                onClick={removeFromCart}
+                className="btn-outline-secondary show-btn" 
+                variant="light" 
+              >Remove Item</Button>
             </Col>
           </Row>
         </Container>
       )
       }
-      {items && (
-        <div>
-          <p>You might also like</p>
-          <div className="card-deck">
-            {sameTeamArray.map(kit => {
-              return (
-                <Link key={kit.id} to={`/items/${kit.id}/`}>
-                  <ItemCard item={ kit } />
-                </Link>
-              )
-            })
-            }
-          </div>
-        </div> 
-      )}
-      {item?.comments.length === 0 ? 
-        <p>No comments yet</p> 
-        :
-        item?.comments.map(comment => {
-          return (
-            <div key={comment.id}>
-              <p>{comment.text}</p>
-              <p>{comment.owner.username}</p>
-              <p>{comment.createdAt}</p>
-            </div> 
-          )
-        })
-      }
-      {isAuth && (
-        <div>
-          <Button 
-            className="Button is-info"
-            onClick={handleComment}
-          >
+      <Container>
+        <Row>
+          <Col>
+            {items && (
+              <><p>You might also like:</p><div className="card-deck">
+                {sameTeamArray.map(kit => {
+                  return (
+                    <Link key={kit.id} to={`/items/${kit.id}/`}>
+                      <ItemCard item={kit} />
+                    </Link>
+                  )
+                })}
+              </div></>            
+            )}
+          </Col>
+          <Col>
+            <p className="comment-title">Comments:</p>
+            {isAuth && (
+              <div>
+                <Button 
+                  className="btn-outline-secondary show-btn" 
+                  variant="light" 
+                  onClick={handleComment}
+                >
         Leave a Comment
-          </Button>  
-        </div>
-      )}
-      {!isAuth && (
-        <div>
-          <Button 
-            className="Button is-info"
-            onClick={handleLogin}
-          >
+                </Button>  
+              </div>
+            )}
+            {!isAuth && (
+              <div>
+                <Button 
+                  className="btn-outline-secondary show-btn" 
+                  variant="light" 
+                  onClick={handleLogin}
+                >
             Login to Comment  
-          </Button>  
-        </div>  
-      )} 
+                </Button>  
+              </div>  
+            )} 
+
+            {item?.comments.length === 0 ? 
+              <p>No comments yet</p> 
+              :
+              item?.comments.map(comment => {
+                return (
+                  <div className="comment" key={comment.id}>
+                    <p className="comment-text">{comment.text}</p>
+                    <p>{comment.owner.username}</p>
+                    <p>{comment.createdAt}</p>
+                  </div> 
+                )
+              })
+            }
+            
+          </Col>  
+        </Row> 
+      </Container> 
+      
+
+      
+      <Col xs={6}>
+        {/* <Button onClick={toggleShowB}>
+          Toggle Toast <strong>without</strong> Animation
+        </Button> */}
+      </Col>
       
     </div>    
   )

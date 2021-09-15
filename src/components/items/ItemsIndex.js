@@ -3,6 +3,7 @@ import React from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import Select from 'react-select'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 import { getAllItems } from '../lib/api'
 import ItemCard from './ItemCard'
@@ -99,32 +100,37 @@ function ItemsIndex() {
   }
 
   return (
-    <section className="Container">
-      <div>  
-        <h1>Swap/Shop</h1>
-      </div>
-      <div className="search-bar">
-        <label htmlFor="header-search">
-          <span className="visually-hidden">Search by player</span>
-        </label>
-        <input  
-          type="text"
-          id="header-search"
-          placeholder="Search by player"
-          name="s"
-          onChange={handleSearch}
-        />  
-      </div>
-      <div className="form-group">
-        <label htmlFor="teamName">Team</label>
-        <Select
-          options={teamOptions}
-          defaultValue="Search by Team"
-          onChange={selected =>
-            handleTeamSearch(selected, 'teamName')
-          }
-        />
-      </div>  
+    <Container className="Container">
+      <Row className="search-bar-row">
+        <Col className="search-bar-col">
+          <Col className="search-bar player">
+            <label htmlFor="header-search">
+              Search by player
+            </label>
+            <div>
+              <input  
+                type="text"
+                id="header-search"
+                placeholder="Search by player"
+                name="s"
+                onChange={handleSearch}
+              />
+            </div>  
+          </Col>
+        </Col>
+        <Col className="search-bar-col">
+          <div className="form-group search-bar">
+            <label htmlFor="teamName">Search by Team</label>
+            <Select
+              options={teamOptions}
+              defaultValue="Search by Team"
+              onChange={selected =>
+                handleTeamSearch(selected, 'teamName')
+              }
+            />
+          </div>
+        </Col>        
+      </Row> 
       <div className="card-deck">
         {isLoading && <p>...loading</p>}
         {items && filteredItems().map(item => (
@@ -134,19 +140,24 @@ function ItemsIndex() {
         )
         )}
       </div> 
-      <div className="btn-group">
-        <button 
-          className="btn btn-outline-info" 
-          onClick={handleHome}>
+      <Container>
+        <Row className="bottom-buttons">
+          <Button 
+            variant="light"
+            className="btn-outline-secondary" 
+            onClick={handleHome}>
             Home
-        </button>
-        <button
-          className="btn btn-outline-info"
-          onClick={handleScrollToTop}
-        >↑ to top</button>  
-      </div>
-          
-    </section>
+          </Button>
+          <Button
+            variant="light"
+            className="btn-outline-secondary"
+            onClick={handleScrollToTop}
+          >
+          ↑ to top
+          </Button>  
+        </Row>
+      </Container>         
+    </Container>
     
   )
 }

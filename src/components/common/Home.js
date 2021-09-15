@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-import { Container, Jumbotron, Carousel } from 'react-bootstrap'
+import { Container, Jumbotron, Carousel, Row } from 'react-bootstrap'
 import ItemCard from '../items/ItemCard'
 
 import { getAllItems } from '../lib/api'
@@ -39,23 +39,26 @@ function Home() {
   
   return (
     <>
-      
-
+      <Jumbotron>      
+        <div className="jumbo-div">
+          <Link to="/items">
+            <h1>SWAPxSHOP</h1>
+          </Link>     
+        </div>   
+      </Jumbotron>
       <Container>
         <div className="row">
           {isError && <p>Oops! Something went wrong 😢</p>}
-          {isLoading && <p>...loading</p>}       
-          <Jumbotron>      
-            <div className="jumbo-div">
-              <h1>SWAPxSHOP</h1>     
-            </div>   
-          </Jumbotron>
+          {isLoading && <p>...loading</p>}               
         </div>
-        <div>
+        <Row className="justify-content-center">
+          <p>Recently Added Kits:</p>
+        </Row>
+        <div className="card-deck">
           {items && (
             recentlyAdded.map(item => {
               return (
-                item.slice(0, 4).map(card => (  
+                item.slice(0, 3).map(card => (  
                   <Link key={card.id} to={`items/${card.id}/`}>   
                     <ItemCard item={ card } />
                   </Link>  
@@ -66,7 +69,6 @@ function Home() {
         </div>
       </Container>
     </>
-    
   )
 }
 
