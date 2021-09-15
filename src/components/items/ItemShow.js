@@ -24,10 +24,7 @@ function ItemShow() {
     return []
   })
   const sameTeamArray = []
-  const [showB, setShowB] = React.useState(true)
-
-
-  const toggleShowB = () => setShowB(!showB)
+  const [showB, setShowB] = React.useState(false)
   
 
   React.useEffect(()=> {
@@ -53,8 +50,11 @@ function ItemShow() {
   // ** setting item into state & adding to local storage **
   const addToCart = () => {
     setCartItems([...cartItems, item])
+    toggleShowB()
     // localStorage.setItem('cartItem', JSON.stringify(cartItems))
   }
+
+  const toggleShowB = () => setShowB(!showB)
 
   const removeFromCart = () => {
     
@@ -132,6 +132,20 @@ function ItemShow() {
               <p>{item.description}</p>
               <p>Condition: {item.condition}</p>
               <h2>£{item.price}</h2>
+              <Col xs={6} className="my-1">
+                <Toast onClose={toggleShowB} show={showB} animation={false}>
+                  <Toast.Header>
+                    <img
+                      src="holder.js/20x20?text=%20"
+                      className="rounded me-2"
+                      alt=""
+                    />
+                    {/* <strong className="me-auto">Bootstrap</strong>
+                    <small>11 mins ago</small> */}
+                  </Toast.Header>
+                  <Toast.Body>Your item has been added to the cart</Toast.Body>
+                </Toast>
+              </Col>
               <Button onClick={addToCart}>Add to cart</Button>
               {isAuth ?
                 <Button onClick={handleLike}>
@@ -195,24 +209,11 @@ function ItemShow() {
         </div>  
       )} 
 
-      <Col xs={6} className="my-1">
-        <Toast onClose={toggleShowB} show={showB} animation={false}>
-          <Toast.Header>
-            <img
-              src="holder.js/20x20?text=%20"
-              className="rounded me-2"
-              alt=""
-            />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-          </Toast.Header>
-          <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
-        </Toast>
-      </Col>
+      
       <Col xs={6}>
-        <Button onClick={toggleShowB}>
+        {/* <Button onClick={toggleShowB}>
           Toggle Toast <strong>without</strong> Animation
-        </Button>
+        </Button> */}
       </Col>
       
     </div>    

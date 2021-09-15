@@ -35,6 +35,12 @@ export function likeItem(itemId) {
   return axios.post(`${baseURL}/items/${itemId}/like/`, null, getHeaders())
 }
 
+// * BOUGHT ITEM Request
+
+export function boughtBy(itemId) {
+  return axios.post(`${baseURL}/cart/checkout/`, itemId, getHeaders())
+}
+
 // * AUTH Requests
 
 export function registerUser(formData) {
