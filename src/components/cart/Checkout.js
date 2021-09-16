@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button } from 'react-bootstrap'
+import React from 'react' 
+import { Button, Container, Toast, Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 import { isAuthenticated } from '../lib/auth'
@@ -13,6 +13,7 @@ function Checkout() {
   const cart = JSON.parse(localStorage.getItem('cartItem')) || []
   console.log(cart)
   const [currentUser, setCurrentUser] = React.useState(null)
+  const [showB, setShowB] = React.useState(false)
 
   React.useEffect(() => {
     const getUser = async () => {
@@ -30,6 +31,7 @@ function Checkout() {
   const handleClick = () => {
     // return currentUser.id
     console.log('This is the cart ', cart)
+    toggleShowB()
     // add bought_by field
     // add buyer.id to item.id to bought_by field
     // const itemId = cart?.map(item => {
@@ -39,32 +41,80 @@ function Checkout() {
     //   console.log(currentUser)
     // })
     // itemId()
-    const getData = async () => {
-      const res = await boughtBy()
-      console.log(res.data)
-    } 
-    getData()
+    // const getData = async () => {
+    //   const res = await boughtBy()
+    //   console.log(res.data)
+    // } 
+    // getData()
   }
+
+  const toggleShowB = () => setShowB(!showB)
 
   const login = () => {
     history.push('/auth/login/')
   }
 
   return (
-    <>
-      <h1>Checkout Page</h1>
-      {console.log(cart)}
-      <div>{cart.image}</div>
+    <Container className="checkout-wrapper">
+      {console.log('Returned', cart)}
+      <div className="checkout-left">
+        {cart.map(item => (
+          <div className="checkout-card" key={item.id}>
+            <img 
+              src={item.image} 
+              alt={item.playerName}
+              className="checkout-image"
+            />
+            <div className="checkout-card-right">
+              <div className="check-item">Player Name: {item.playerName}</div>
+              <div className="check-item">Price £: {item.price}</div>
+            </div>
+            
+          </div>
+        ))}
+      </div>
+      <div className="checkout-right">
+        <div className="price-wrapper">
+          Total To Pay: £<span className="price"> {cart.reduce((sum, price) => {
+            return sum + Number(price.price)
+          }, 0)}</span>
+        </div>
       
-      {isAuth && (
-        <Button onClick={handleClick}>Buy</Button>
-      )}
+        {isAuth && (
+          <>
+            <Col xs={6} className="my-1">
+              <Toast onClose={toggleShowB} show={showB} animation={false}>
+                <Toast.Header>
+                  <img
+                    src="holder.js/20x20?text=%20"
+                    className="rounded me-2"
+                    alt=""
+                  />
+                  <strong className="me-auto">Click to close</strong>
+                </Toast.Header>
+                <Toast.Body>Thank You for your purchase. Stripe/Paypal Integration</Toast.Body>
+              </Toast>
+            </Col>
+            <Button 
+              variant="light" 
+              className="btn-outline-secondary show-btn" 
+              onClick={handleClick}>
+          Buy
+            </Button>
+          </>
+        )}
 
-      {!isAuth && (
-        <Button onClick={login}>Login to Buy</Button>
-      )}
-      
-    </>
+        {!isAuth && (
+          <Button 
+            variant="light" 
+            className="btn-outline-secondary show-btn" 
+            onClick={login}>
+          Login to Buy
+          </Button>
+        )}
+
+      </div>
+    </Container>
     
 
   )

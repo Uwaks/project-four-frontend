@@ -51,13 +51,11 @@ function ItemShow() {
   const addToCart = () => {
     setCartItems([...cartItems, item])
     toggleShowB()
-    // localStorage.setItem('cartItem', JSON.stringify(cartItems))
   }
 
   const toggleShowB = () => setShowB(!showB)
 
   const removeFromCart = () => {
-    
     setCartItems(cartItems.filter(cartItem => {
       console.log('cartItem.id', cartItem.id) 
       console.log('itemId', itemId)
@@ -140,8 +138,7 @@ function ItemShow() {
                       className="rounded me-2"
                       alt=""
                     />
-                    {/* <strong className="me-auto">Bootstrap</strong>
-                    <small>11 mins ago</small> */}
+                    <strong className="me-auto">Click to close</strong>
                   </Toast.Header>
                   <Toast.Body>Your item has been added to the cart</Toast.Body>
                 </Toast>
@@ -232,15 +229,6 @@ function ItemShow() {
           </Col>  
         </Row> 
       </Container> 
-      
-
-      
-      <Col xs={6}>
-        {/* <Button onClick={toggleShowB}>
-          Toggle Toast <strong>without</strong> Animation
-        </Button> */}
-      </Col>
-      
     </div>    
   )
 }

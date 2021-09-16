@@ -33,12 +33,6 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 
-          <LinkContainer to='/items/'>
-            <Nav.Link>
-            Shop
-            </Nav.Link>
-          </LinkContainer>
-        
           <Nav className="ml-auto">
             
             <LinkContainer to='/items/'>
@@ -74,7 +68,10 @@ function Header() {
               </LinkContainer>
             )}
             {isAuth && (
-              <Button variant="light" className="btn-outline-secondary" onClick={logOut}>Log Out</Button>
+              <Button 
+                variant="light" 
+                className="btn-outline-secondary" 
+                onClick={logOut}>Log Out</Button>
             )}
           </Nav>
         </Navbar.Collapse>
