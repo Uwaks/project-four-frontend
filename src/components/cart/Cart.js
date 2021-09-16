@@ -67,7 +67,7 @@ function Cart() {
                   <Button variant="light" 
                     className="btn-outline-secondary show-btn"
                     onClick={() => removeFromCart(item.id)}>
-                  Empty Cart
+                  Remove from Cart
                   </Button>
                 </Col>
               </Row>
