@@ -61,8 +61,6 @@ function ItemShow() {
   const removeFromCart = () => {
     
     setCartItems(cartItems.filter(cartItem => {
-      console.log('cartItem.id', cartItem.id) 
-      console.log('itemId', itemId)
       return Number(cartItem.id) !== Number(itemId)
     }
     ))
@@ -70,8 +68,6 @@ function ItemShow() {
 
   // * Comment Handlers
   const handleComment = () => {
-    console.log('itemId', itemId)
-    console.log('history', history)
     history.push(`/items/${itemId}/comments`)
   }
 
@@ -82,7 +78,6 @@ function ItemShow() {
   // * Like/Favorite Handlers
 
   const isLiked = item?.likedBy.some(like => {
-    console.log('currentUser', currentUser)
     if (currentUser !== null) {
       return like.id === currentUser?.id
     } else {

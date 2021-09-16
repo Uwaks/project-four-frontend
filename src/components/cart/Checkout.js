@@ -3,15 +3,14 @@ import { Button, Container, Toast, Col } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 import { isAuthenticated } from '../lib/auth'
-import { boughtBy, getUserProfile } from '../lib/api'
-import ItemComment from '../items/ItemComment'
+import { getUserProfile } from '../lib/api'
+// import ItemComment from '../items/ItemComment'
 
 
 function Checkout() {
   const isAuth = isAuthenticated()
   const history = useHistory()
   const cart = JSON.parse(localStorage.getItem('cartItem')) || []
-  console.log(cart)
   const [currentUser, setCurrentUser] = React.useState(null)
   const [showB, setShowB] = React.useState(false)
 
@@ -20,7 +19,6 @@ function Checkout() {
       try {
         const res = await getUserProfile()
         setCurrentUser(res.data)
-        console.log(res.data)
       } catch (err) {
         console.log(err)
       }
@@ -30,7 +28,6 @@ function Checkout() {
 
   const handleClick = () => {
     // return currentUser.id
-    console.log('This is the cart ', cart)
     toggleShowB()
     // add bought_by field
     // add buyer.id to item.id to bought_by field
@@ -56,7 +53,6 @@ function Checkout() {
 
   return (
     <Container className="checkout-wrapper">
-      {console.log('Returned', cart)}
       <div className="checkout-left">
         {cart.map(item => (
           <div className="checkout-card" key={item.id}>

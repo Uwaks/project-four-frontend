@@ -33,7 +33,6 @@ function ItemCreate() {
   const handleUploadedImage = (imageURL) => {
     setFormData({ ...formData, image: imageURL })
     setFormErrors({ ...formErrors, image: '' })
-    console.log('handle image', formData.image)
   }
 
   const handleSubmit = async (e) => {
@@ -46,7 +45,7 @@ function ItemCreate() {
       setFormErrors(err.response.data)
     }
   }
-  console.log(formErrors)
+
   const handleSelect = (selected, name) => {
     const selectedItems = selected ? selected.value : []
     setFormData({ ...formData, [name]: selectedItems })

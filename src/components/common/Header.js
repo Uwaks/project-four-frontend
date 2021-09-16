@@ -1,23 +1,22 @@
 import React from 'react'
 import { Container, Nav, Navbar, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { isAuthenticated, removeToken } from '../lib/auth'
 
 function Header() {
   const isAuth = isAuthenticated()
-  console.log('isAuthenticated', isAuth)
-  const [isOpen, setIsOpen] = React.useState(false)
-  const { pathname } = useLocation()
+  // const [isOpen, setIsOpen] = React.useState(false)
+  // const { pathname } = useLocation()
   const history = useHistory()
 
   // const handleToggle = () => {
   //   setIsOpen(!isOpen)
   // }
 
-  React.useEffect(() => {
-    setIsOpen(false)
-  }, [pathname])
+  // React.useEffect(() => {
+  //   setIsOpen(false)
+  // }, [pathname])
 
   const logOut = () => {
     removeToken()
