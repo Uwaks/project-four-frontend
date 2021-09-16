@@ -30,6 +30,7 @@ function Register() {
       await registerUser(formData)
       history.push('/auth/login')
     } catch (err) {
+      setFormErrors(err.response.data)
       setIsError(true)
     }
   }
@@ -53,6 +54,9 @@ function Register() {
               value={formData.username}
             /> 
           </div>  
+          {formErrors && formErrors.username && (
+            <p className="text-danger">Username is required</p>
+          )}
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input 
@@ -66,8 +70,8 @@ function Register() {
             />  
             <small className="form-text text-muted">We never share your email with anyone else.</small>
           </div>
-          {formErrors.email && (
-            <p>Enter valid email</p>
+          {formErrors && formErrors.email && (
+            <p className="text-danger">Email is required</p>
           )}
           <div className="form-group">
             <label htmlFor="inputPassword">Password</label>
@@ -81,6 +85,9 @@ function Register() {
               value={formData.password}
             />    
           </div>
+          {formErrors && formErrors.password && (
+            <p className="text-danger">Password is required</p>
+          )}
           <div className="form-group">
             <label htmlFor="inputPassword">Confirm Password</label>
             <input 
@@ -93,6 +100,9 @@ function Register() {
               value={formData.passwordConfirmation}
             />    
           </div>
+          {formErrors && formErrors.passwordConfirmation && (
+            <p className="text-danger">Passwords must match</p>
+          )}
           {isError && <p className="text-danger">You missed a required field.</p>}
           <div className="btn-group btn-block">
             <Button 

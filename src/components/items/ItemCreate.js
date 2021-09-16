@@ -20,7 +20,7 @@ function ItemCreate() {
 
   const history = useHistory()
   const [formData, setFormData] = React.useState(initialState)
-  const [formErrors, setFormErrors] = React.useState(false)
+  const [formErrors, setFormErrors] = React.useState(initialState)
   const [isError, setIsError] = React.useState(false)
   const teamOptions = TeamOptions()
 
@@ -43,8 +43,7 @@ function ItemCreate() {
       history.push(`/items/${data.id}`)
     } catch (err) {
       setIsError(true)
-      setFormErrors(err.response.data.errors)
-      
+      setFormErrors(err.response.data)
     }
   }
   console.log(formErrors)
@@ -69,7 +68,10 @@ function ItemCreate() {
                 handleSelect(selected, 'teamName')
               }
             />
-          </div>  
+          </div> 
+          {formErrors && formErrors.teamName && (
+            <p className="text-danger">Team name required</p>
+          )} 
           <div className="form-group">
             <label htmlFor="playerName">Player Name</label>
             <input 
@@ -83,7 +85,7 @@ function ItemCreate() {
             /> 
           </div> 
           {formErrors && formErrors.playerName && (
-            <p>player name required</p>
+            <p className="text-danger">Player name required</p>
           )}
           <div className="form-group">
             <label htmlFor="description">Description</label>
@@ -99,6 +101,9 @@ function ItemCreate() {
               value={formData.description}
             /> 
           </div>
+          {formErrors && formErrors.description && (
+            <p className="text-danger">Description required</p>
+          )}
           <div className="form-group">
             <label htmlFor="condition">Condition</label>
             <div>
@@ -144,6 +149,9 @@ function ItemCreate() {
               />  
             </div>             
           </div>
+          {formErrors && formErrors.condition && (
+            <p className="text-danger">Condition required</p>
+          )}
           <div className="form-group">
             <label htmlFor="image">Kit Pic</label>
             <ImageUpload 
@@ -151,6 +159,9 @@ function ItemCreate() {
               onChange={handleUploadedImage}
             />
           </div>
+          {formErrors && formErrors.image && (
+            <p className="text-danger">Image required</p>
+          )}
           <div className="form-group">
             <label htmlFor="price">Price</label>
             <input 
@@ -163,6 +174,9 @@ function ItemCreate() {
               value={formData.price}
             /> 
           </div> 
+          {formErrors && formErrors.price && (
+            <p className="text-danger">Price required</p>
+          )}
           {isError && (
             <p className="text-danger">You missed a required field</p>
           )}
