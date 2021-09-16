@@ -1,13 +1,15 @@
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { isAuthenticated } from '../lib/auth'
 
-function Cart({ setCartItems, cartItems, itemId }) {
+function Cart() {
   const history = useHistory()
-  let cart = JSON.parse(localStorage.getItem('cartItem')) || []  
+  // const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem('cartItem')) || [])  
+  let cart = JSON.parse(localStorage.getItem('cartItem')) || []
   const [isEmpty, setIsEmpty ] = React.useState(true)
-  const isAuth = isAuthenticated
+  const isAuth = isAuthenticated()
+  const { itemId } = useParams()
 
   React.useEffect(() => {
     const getCart = () => {
@@ -23,6 +25,17 @@ function Cart({ setCartItems, cartItems, itemId }) {
     setIsEmpty(!isEmpty)
   }
 
+  // const removeFromCart = () => {
+    
+  //   setCart(cart.filter(cartItem => {
+  //     console.log('cartItem.id', cartItem.id) 
+  //     console.log('itemId', itemId)
+  //     return Number(cartItem.id) !== Number(itemId)
+  //   }
+  //   ))
+  // }
+
+
   const checkout = () => {
     console.log('Clicked')
     history.push('/cart/checkout')
@@ -37,42 +50,72 @@ function Cart({ setCartItems, cartItems, itemId }) {
       {console.log('This is the cart', cart)}
       <div>
         {cart.length === 0 && (
-          <div>Your cart is empty</div>
+          <Container>
+            <h1>Your cart is empty</h1>
+          </Container>
+          
         )}
       </div>
       
-      <div>
-        {cart.map(item => (
-          <Container key={item.id}>
-            <Row>
-              <Col>
-                <Link  to={`/items/${item.id}/`}>
-                  <img src={item.image} alt={item.playerName}/>
-                </Link>
-              </Col>
-              <Col>
-                <div>{item.playerName}</div>
-                <div>{item.price}</div>
-                <Button onClick={removeFromCart}>Empty Cart</Button>
-              </Col>
-            </Row>
-          </Container>
-        ))}
-        <Col>
-          <div>
-          Total: £<span> {cart.reduce((sum, price) => {
-              return sum + Number(price.price)
-            }, 0)}</span>
-          </div>
-          {console.log(cart, isEmpty)}
-          {!isEmpty && (
-            <div>
-              <Button onClick={checkout}>Proceed to Checkout</Button>
+      <Container className="cart-wrapper">
+        <div className="cart-left">
+          {cart.map(item => (
+            <Container className="cart" key={item.id}>
+              <Row className="cart-item">
+                <Col>
+                  <Link  to={`/items/${item.id}/`}>
+                    <img 
+                      src={item.image} 
+                      alt={item.playerName}
+                      className="cart-image"
+                    />
+                  </Link>
+                </Col>
+                <Col>
+                  <div>{item.playerName}</div>
+                  <div>{item.teamName}</div>
+                  <div>{item.price}</div>
+                  <Button variant="light" 
+                    className="btn-outline-secondary show-btn"
+                    onClick={removeFromCart}>
+                  Empty Cart
+                  </Button>
+                </Col>
+              </Row>
+            </Container>
+          ))}
+
+        </div>
+        
+        <div className="cart-right">
+          <Col>
+            {console.log(cart, isEmpty)}
+            {!isEmpty && (
+              <div>
+                <Button 
+                  variant="light" 
+                  className="btn-outline-secondary show-btn" 
+                  onClick={checkout}>
+                Proceed to Checkout
+                </Button>
+              </div>
+            )}
+            <div><Button 
+              variant="light" 
+              className="btn-outline-secondary show-btn" 
+              onClick={backToShop}>
+            Continue Shopping
+            </Button></div>
+            <div className="price-wrapper">
+          Total: £<span className="price"> {cart.reduce((sum, price) => {
+                return sum + Number(price.price)
+              }, 0)}</span>
             </div>
-          )}
-          <div><Button onClick={backToShop}>Continue Shopping</Button></div>
-        </Col>
-      </div>  
+          </Col>
+
+        </div>
+
+      </Container>
     </section>
   )
 }
