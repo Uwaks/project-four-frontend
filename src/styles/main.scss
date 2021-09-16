@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+// * HOME PAGE
 .jumbotron {
   background-image: url('../assets/abigail-keenan-8-s5QuUBtyM-unsplash-1.jpg');
   background-repeat: no-repeat, repeat;
@@ -59,6 +60,28 @@
     margin: 20px;
   }
 }
+
+.title-wrapper{
+  margin-bottom: 50px;
+  
+  a {
+    color: #f0f9ff;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #0f204b;
+    text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+  }
+}
+
+.title-text {
+  font-size: 150px;
+  
+}
+
+.title-text-link {
+  
+} 
 
 // * ItemCard.js
 
