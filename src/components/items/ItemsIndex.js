@@ -107,13 +107,13 @@ function ItemsIndex() {
         <Col className="search-bar-col">
           <Col className="search-bar player">
             <label htmlFor="header-search">
-              Search by player
+              Find a player or team
             </label>
             <div>
               <input  
                 type="text"
                 id="header-search"
-                placeholder="Search by player"
+                placeholder="Search"
                 name="s"
                 onChange={handleSearch}
               />

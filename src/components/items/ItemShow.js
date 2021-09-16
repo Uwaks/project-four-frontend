@@ -2,10 +2,12 @@ import React from 'react'
 import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button, Toast } from 'react-bootstrap'
+import Moment from 'react-moment'
 
 import { getAllItems, getSingleItem, getUserProfile, likeItem } from '../lib/api'
 import { isAuthenticated } from '../lib/auth'
 import ItemCard from './ItemCard'
+
 
 function ItemShow() {
   const { itemId } = useParams()
@@ -80,7 +82,12 @@ function ItemShow() {
   // * Like/Favorite Handlers
 
   const isLiked = item?.likedBy.some(like => {
-    return like.id === currentUser?.id
+    console.log('currentUser', currentUser)
+    if (currentUser !== null) {
+      return like.id === currentUser?.id
+    } else {
+      return 
+    }
   })
 
   const handleLike = async () => {
@@ -163,13 +170,13 @@ function ItemShow() {
                   onClick={handleLogin}
                   className="btn-outline-secondary show-btn" 
                   variant="light" 
-                >login to </Button>
+                >login to like</Button>
               }     
-              <Button 
+              {/* <Button 
                 onClick={removeFromCart}
                 className="btn-outline-secondary show-btn" 
                 variant="light" 
-              >Remove Item</Button>
+              >Remove Item</Button> */}
             </Col>
           </Row>
         </Container>
@@ -214,7 +221,6 @@ function ItemShow() {
                 </Button>  
               </div>  
             )} 
-
             {item?.comments.length === 0 ? 
               <p>No comments yet</p> 
               :
@@ -223,12 +229,11 @@ function ItemShow() {
                   <div className="comment" key={comment.id}>
                     <p className="comment-text">{comment.text}</p>
                     <p>{comment.owner.username}</p>
-                    <p>{comment.createdAt}</p>
+                    <p><Moment fromNow>{comment.createdAt}</Moment></p>
                   </div> 
                 )
               })
-            }
-            
+            }           
           </Col>  
         </Row> 
       </Container> 
