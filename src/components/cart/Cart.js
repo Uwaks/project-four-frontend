@@ -5,8 +5,7 @@ import { isAuthenticated } from '../lib/auth'
 
 function Cart() {
   const history = useHistory()
-  // const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem('cartItem')) || [])  
-  let cart = JSON.parse(localStorage.getItem('cartItem')) || []
+  const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem('cartItem')) || [])
   const [isEmpty, setIsEmpty ] = React.useState(true)
   const isAuth = isAuthenticated()
   const { itemId } = useParams()
@@ -19,22 +18,12 @@ function Cart() {
     getCart()
   }, [])
 
-  const removeFromCart = () => {
-    localStorage.removeItem('cartItem')
-    cart = []
-    setIsEmpty(!isEmpty)
+  const removeFromCart = (itemId) => {
+    console.log(itemId)
+    const newItems = cart.filter(item => item.id !== itemId)
+    setCart(newItems)
+    localStorage.setItem('cartItem', JSON.stringify(newItems))
   }
-
-  // const removeFromCart = () => {
-    
-  //   setCart(cart.filter(cartItem => {
-  //     console.log('cartItem.id', cartItem.id) 
-  //     console.log('itemId', itemId)
-  //     return Number(cartItem.id) !== Number(itemId)
-  //   }
-  //   ))
-  // }
-
 
   const checkout = () => {
     console.log('Clicked')
@@ -77,7 +66,7 @@ function Cart() {
                   <div>{item.price}</div>
                   <Button variant="light" 
                     className="btn-outline-secondary show-btn"
-                    onClick={removeFromCart}>
+                    onClick={() => removeFromCart(item.id)}>
                   Empty Cart
                   </Button>
                 </Col>
