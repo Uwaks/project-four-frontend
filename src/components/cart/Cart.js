@@ -7,8 +7,8 @@ function Cart() {
   const history = useHistory()
   const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem('cartItem')) || [])
   const [isEmpty, setIsEmpty ] = React.useState(true)
-  const isAuth = isAuthenticated()
-  const { itemId } = useParams()
+  // const isAuth = isAuthenticated()
+  // const { itemId } = useParams()
 
   React.useEffect(() => {
     const getCart = () => {
@@ -19,14 +19,12 @@ function Cart() {
   }, [])
 
   const removeFromCart = (itemId) => {
-    console.log(itemId)
     const newItems = cart.filter(item => item.id !== itemId)
     setCart(newItems)
     localStorage.setItem('cartItem', JSON.stringify(newItems))
   }
 
   const checkout = () => {
-    console.log('Clicked')
     history.push('/cart/checkout')
   }
 
@@ -36,7 +34,6 @@ function Cart() {
 
   return (
     <section>
-      {console.log('This is the cart', cart)}
       <div>
         {cart.length === 0 && (
           <Container>
@@ -78,7 +75,6 @@ function Cart() {
         
         <div className="cart-right">
           <Col>
-            {console.log(cart, isEmpty)}
             {!isEmpty && (
               <div>
                 <Button 

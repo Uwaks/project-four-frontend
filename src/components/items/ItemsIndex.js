@@ -40,7 +40,6 @@ function ItemsIndex() {
     } else {
       comparison = -1
     }
-    console.log('comparison', comparison)
     return comparison
   }
 
@@ -71,7 +70,6 @@ function ItemsIndex() {
   ]
 
   const handleTeamSearch = (e) => {
-    console.log('team search', e.value)
     setSearchValue(e.value)
     // const selectedItems = selected ? selected.value : []
     // setFormData({ ...formData, [name]: selectedItems })

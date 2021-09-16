@@ -37,7 +37,6 @@ function ItemComment() {
     e.preventDefault()
     try {
       await createComment(itemId, formData)
-      console.log(formData.text)
       history.push(`/items/${itemId}`)
     } catch (err) {
       console.log(err)

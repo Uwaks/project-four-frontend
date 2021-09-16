@@ -28,10 +28,8 @@ function Home() {
 
 
   const filterItems = () => {
-    console.log(items)
     items.sort((a, b) => (a.id < b.id))
     recentlyAdded.push(items)
-    console.log('recently added', recentlyAdded)
   }
 
   items ? filterItems() : console.log('no items')
