@@ -7,6 +7,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 
 import { getAllItems } from '../lib/api'
 import ItemCard from './ItemCard'
+// import TeamOptions from '../common/TeamOptions'
 
 function ItemsIndex() {
   const [items, setItems] = React.useState(null)
@@ -15,6 +16,7 @@ function ItemsIndex() {
   const [searchValue, setSearchValue] = React.useState('')
   const history = useHistory()
   const rootElement = document.documentElement
+  // const teamOptions = TeamOptions()
 
   React.useEffect(() => {
     const getData = async () => {
