@@ -181,15 +181,16 @@ function ItemShow() {
         <Row>
           <Col>
             {items && (
-              <><p>You might also like:</p><div className="card-deck">
-                {sameTeamArray.map(kit => {
-                  return (
-                    <Link key={kit.id} to={`/items/${kit.id}/`}>
-                      <ItemCard item={kit} />
-                    </Link>
-                  )
-                })}
-              </div></>            
+              <><p>You might also like:</p>
+                <div className="card-deck">
+                  {sameTeamArray.map(kit => {
+                    return (
+                      <Link key={kit.id} to={`/items/${kit.id}/`}>
+                        <ItemCard item={kit} className="liked-card"/>
+                      </Link>
+                    )
+                  })}
+                </div></>            
             )}
           </Col>
           <Col>
