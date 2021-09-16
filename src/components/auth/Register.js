@@ -16,12 +16,12 @@ function Register() {
   const history = useHistory()
   const [formData, setFormData] = React.useState(initialState)
   const [formErrors, setFormErrors] = React.useState(initialState)
+  const [isError, setIsError] = React.useState(false)
   
   const handleChange = event => {
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
     setFormData({ ...formData, [event.target.name]: value })
     setFormErrors({ ...formErrors, [event.target.name]: '' })
-    console.log(formData)
   }
 
   const handleSubmit = async (e) => {
@@ -30,7 +30,7 @@ function Register() {
       await registerUser(formData)
       history.push('/auth/login')
     } catch (err) {
-      console.log(err.response.data)
+      setIsError(true)
     }
   }
 
@@ -66,6 +66,9 @@ function Register() {
             />  
             <small className="form-text text-muted">We never share your email with anyone else.</small>
           </div>
+          {formErrors.email && (
+            <p>Enter valid email</p>
+          )}
           <div className="form-group">
             <label htmlFor="inputPassword">Password</label>
             <input 
@@ -90,6 +93,7 @@ function Register() {
               value={formData.passwordConfirmation}
             />    
           </div>
+          {isError && <p className="text-danger">You missed a required field.</p>}
           <div className="btn-group btn-block">
             <Button 
               className="btn btn-block" 

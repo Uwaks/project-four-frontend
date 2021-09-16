@@ -27,9 +27,7 @@ function Login() {
       setToken(data.token)
       history.push('/items')
     } catch (err) {
-      window.alert('Username or password was not recognized. Please, try again.')
       setIsError(true)
-      console.log(isError)
     }
   }
 
@@ -64,6 +62,9 @@ function Login() {
               value={formData.password}
             />    
           </div>
+          {isError && (
+            <p>Incorrect Email or Password</p>
+          )}
           <div className="btn-group btn-block">
             <Button 
               className="btn btn-block" 

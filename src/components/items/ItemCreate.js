@@ -20,8 +20,10 @@ function ItemCreate() {
 
   const history = useHistory()
   const [formData, setFormData] = React.useState(initialState)
-  const [formErrors, setFormErrors] = React.useState(initialState)
+  const [formErrors, setFormErrors] = React.useState(false)
+  const [isError, setIsError] = React.useState(false)
   const teamOptions = TeamOptions()
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -31,6 +33,7 @@ function ItemCreate() {
   const handleUploadedImage = (imageURL) => {
     setFormData({ ...formData, image: imageURL })
     setFormErrors({ ...formErrors, image: '' })
+    console.log('handle image', formData.image)
   }
 
   const handleSubmit = async (e) => {
@@ -39,12 +42,12 @@ function ItemCreate() {
       const { data } = await createItem(formData)
       history.push(`/items/${data.id}`)
     } catch (err) {
+      setIsError(true)
       setFormErrors(err.response.data.errors)
+      
     }
   }
-
-  
-
+  console.log(formErrors)
   const handleSelect = (selected, name) => {
     const selectedItems = selected ? selected.value : []
     setFormData({ ...formData, [name]: selectedItems })
@@ -61,7 +64,7 @@ function ItemCreate() {
             <label htmlFor="teamName">Team</label>
             <Select
               options={teamOptions}
-              defaultValue={teamOptions[0]}
+              // defaultValue={teamOptions[0]}
               onChange={selected =>
                 handleSelect(selected, 'teamName')
               }
@@ -79,9 +82,9 @@ function ItemCreate() {
               value={formData.playerName}
             /> 
           </div> 
-          {/* {formErrors.playerName && (
-            <p>{formErrors.playerName}</p>
-          )} */}
+          {formErrors && formErrors.playerName && (
+            <p>player name required</p>
+          )}
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <Form.Control  
@@ -160,6 +163,9 @@ function ItemCreate() {
               value={formData.price}
             /> 
           </div> 
+          {isError && (
+            <p className="text-danger">You missed a required field</p>
+          )}
           < div className="field">
             <Button 
               variant="secondary" 
