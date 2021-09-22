@@ -1,7 +1,9 @@
 import axios from 'axios'
+
+import { baseURL } from '../../config'
 import { getToken } from './auth'
 
-const baseURL = '/api'
+// const baseURL = '/api'
 
 export function getHeaders() {
   return {
@@ -16,7 +18,7 @@ export function getAllItems() {
 }
 
 export function getSingleItem(itemId) {
-  return axios.get(`${baseURL}/items/${itemId}`)
+  return axios.get(`${baseURL}/items/${itemId}/`)
 }
 
 export function createItem(formData) {
