@@ -11,6 +11,7 @@ function Checkout() {
   const isAuth = isAuthenticated()
   const history = useHistory()
   const cart = JSON.parse(localStorage.getItem('cartItem')) || []
+  // eslint-disable-next-line no-unused-vars
   const [currentUser, setCurrentUser] = React.useState(null)
   const [showB, setShowB] = React.useState(false)
 

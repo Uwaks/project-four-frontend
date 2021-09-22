@@ -58,13 +58,13 @@ function ItemShow() {
 
   const toggleShowB = () => setShowB(!showB)
 
-  const removeFromCart = () => {
+  // const removeFromCart = () => {
     
-    setCartItems(cartItems.filter(cartItem => {
-      return Number(cartItem.id) !== Number(itemId)
-    }
-    ))
-  }
+  //   setCartItems(cartItems.filter(cartItem => {
+  //     return Number(cartItem.id) !== Number(itemId)
+  //   }
+  //   ))
+  // }
 
   // * Comment Handlers
   const handleComment = () => {

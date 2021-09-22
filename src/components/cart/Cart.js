@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import { isAuthenticated } from '../lib/auth'
+// import { isAuthenticated } from '../lib/auth'
 
 function Cart() {
   const history = useHistory()
